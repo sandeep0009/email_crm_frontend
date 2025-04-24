@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const token = localStorage.getItem("token");
+  console.log(token);
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 

@@ -20,8 +20,7 @@ const Signin = () => {
         email,
         password,
       });
-
-      console.log("Login successful:", res.data);
+      localStorage.setItem('token',res.data.data.token);
       navigate("/sender");
     } catch (error) {
       console.error("Error during sign in:", error);

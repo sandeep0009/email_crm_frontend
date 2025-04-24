@@ -24,10 +24,8 @@ const Signup = () => {
         password,
       });
 
-      console.log("Signup successful:", res.data);
-
-      // Redirect to login page after successful signup
-      navigate("/signin");
+      localStorage.setItem('token',res.data.token);
+      navigate("/");
     } catch (error) {
       console.error("Error during signup:", error);
       // Optionally add a toast or error UI

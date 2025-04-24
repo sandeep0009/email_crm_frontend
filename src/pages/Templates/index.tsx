@@ -28,8 +28,10 @@ const Template = () => {
         title,
         htmlCode,
       });
+      setHtmlCode("");
+      setTitle("");
       setMessage("Template saved successfully!");
-      console.log("Response:", res.data);
+
     } catch (error: any) {
       console.error("Error saving template:", error);
       setMessage("Error saving template.");
