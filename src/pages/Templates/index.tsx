@@ -24,7 +24,7 @@ const Template = () => {
     setMessage("");
 
     try {
-      const res = await axiosInstance.post("/create-template", {
+      await axiosInstance.post("/create-template", {
         title,
         htmlCode,
       });
