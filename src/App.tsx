@@ -7,6 +7,7 @@ import Sender from "./pages/Senders"
 import Layout from "./lib/layout"
 import ErrorPage from "./components/ErrorPage"
 import Home from "./pages/Home"
+import ProtectedRoutes from "./components/ProtectedRoutes"
 
 
 
@@ -17,11 +18,11 @@ function App() {
     <Layout>
      <Routes>
       <Route path="/" element={<Home/>}/>
-      <Route path="/template" element={<Template/>}/>
+      <Route path="/template" element={<ProtectedRoutes children={<Template/>} />}/>
       <Route path="/signup" element={<Signup/>}/>
       <Route path="/signin" element={<Signin/>}/>
-      <Route path="/campaign" element={<Campaign/>}/>
-      <Route path="/sender" element={<Sender/>}/>
+      <Route path="/campaign" element={<ProtectedRoutes children={<Campaign/>}/>}/>
+      <Route path="/sender" element={<ProtectedRoutes children={<Sender/>}/>}/>
       <Route path="*" element={<ErrorPage/>}/>
       
       
