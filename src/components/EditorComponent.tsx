@@ -12,8 +12,9 @@ const EditorComponent = ({ onChange }: { onChange: (value: string) => void }) =>
         skin: "snow",
         icons: "thin",
         placeholder: "Ask a question or post an update...",
-        height: 200,
+        height: 400,
         menubar: true,
+  
         plugins: [
           "advlist autolink lists link image charmap print preview anchor",
           "searchreplace visualblocks code fullscreen textcolor",
@@ -24,6 +25,7 @@ const EditorComponent = ({ onChange }: { onChange: (value: string) => void }) =>
           "undo redo | styleselect | fontsizeselect | code | bold italic | alignleft aligncenter alignright alignjustify | outdent indent",
       }}
       onEditorChange={handleEditorChange}
+    
     />
   );
 };

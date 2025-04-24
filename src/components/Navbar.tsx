@@ -1,56 +1,86 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Button } from "./ui/button";
-const Navbar=()=>{
-    const token=localStorage.getItem('token');
-    const navigate=useNavigate();
+import { Menu, X } from "lucide-react";
 
-    const handleLogout=()=>{
-        localStorage.removeItem('token');
-        navigate('/signin');
+const Navbar = () => {
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    }
-    return(
-        <>
-        <div className="flex justify-between items-center bg-white shadow-2xl p-4">
-            <div>
-                <h1 className="font-bold">Reach Flow</h1>
-            </div>
-            <div>
-                <ul className="flex gap-6">
-                    <li>
-                        <Link to="/sender" className="hover:font-bold" >Sender</Link>
-                    </li>
-                    <li>
-                    <Link to="/template" className="hover:font-bold">Template</Link>
-                    </li>
-                    <li>
-                    <Link to="/campaign" className="hover:font-bold">Campaign</Link>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                {
-                    token ?
-                    <>
-                    <Button onClick={handleLogout}>LogOut</Button>
-                    </>
-                    :
-                    <>
-                    <div className="flex gap-5">
-                        <Button onClick={()=>navigate('/signin')}>Login</Button>
-                        <Button onClick={()=>navigate('/signup')}>SignUp</Button>
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/signin");
+  };
 
-                    </div>
-                    </>
-                }
+  return (
+    <div className="bg-white p-4 mb-4 shadow">
+      <div className="flex justify-between items-center">
+        <h1
+          className="font-bold text-lg cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          Reach Flow
+        </h1>
 
-            </div>
+        <ul className="hidden md:flex gap-6">
+          <li>
+            <Link to="/sender" className="hover:font-bold">Sender</Link>
+          </li>
+          <li>
+            <Link to="/template" className="hover:font-bold">Template</Link>
+          </li>
+          <li>
+            <Link to="/campaign" className="hover:font-bold">Campaign</Link>
+          </li>
+        </ul>
 
+        <div className="hidden md:flex gap-4">
+          {token ? (
+            <Button onClick={handleLogout}>LogOut</Button>
+          ) : (
+            <>
+              <Button onClick={() => navigate("/signin")}>Login</Button>
+              <Button onClick={() => navigate("/signup")}>SignUp</Button>
+            </>
+          )}
         </div>
-        
-        </>
-    )
 
-}
+        <button
+          className="md:hidden"
+          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
 
-export default Navbar
+      {isMobileMenuOpen && (
+        <div className="md:hidden mt-4 space-y-4">
+          <ul className="flex flex-col gap-4">
+            <li>
+              <Link to="/sender" className="hover:font-bold" onClick={() => setIsMobileMenuOpen(false)}>Sender</Link>
+            </li>
+            <li>
+              <Link to="/template" className="hover:font-bold" onClick={() => setIsMobileMenuOpen(false)}>Template</Link>
+            </li>
+            <li>
+              <Link to="/campaign" className="hover:font-bold" onClick={() => setIsMobileMenuOpen(false)}>Campaign</Link>
+            </li>
+          </ul>
+          <div className="flex flex-col gap-2">
+            {token ? (
+              <Button onClick={handleLogout}>LogOut</Button>
+            ) : (
+              <>
+                <Button onClick={() => { navigate("/signin"); setIsMobileMenuOpen(false); }}>Login</Button>
+                <Button onClick={() => { navigate("/signup"); setIsMobileMenuOpen(false); }}>SignUp</Button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Navbar;

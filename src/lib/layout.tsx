@@ -12,6 +12,8 @@ const Layout=({children}:LayoutProp)=>{
 
     return(
         <>
+        <div className="max-w-7xl m-auto">
+
        {
         !hideNavbar && 
         <div className="hr">
@@ -21,6 +23,7 @@ const Layout=({children}:LayoutProp)=>{
         <main className="mb-4">
             {children}
         </main>
+        </div>
         
         </>
 

@@ -6,7 +6,8 @@ import Campaign from "./pages/Campaign"
 import Sender from "./pages/Senders"
 import Layout from "./lib/layout"
 import ErrorPage from "./components/ErrorPage"
-import { Home } from "lucide-react"
+import Home from "./pages/Home"
+
 
 
 function App() {

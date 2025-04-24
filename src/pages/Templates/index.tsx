@@ -49,7 +49,14 @@ const Template = () => {
             placeholder="Enter title"
           />
         </div>
-        <EditorComponent onChange={handleEditorChange} />
+
+        <div className="border rounded-md">
+        <EditorComponent onChange={handleEditorChange}  />
+        </div>
+        
+
+      
+        
       </div>
 
       <div className="md:w-1/2 border rounded-lg p-4 bg-white shadow">
@@ -61,7 +68,7 @@ const Template = () => {
 
         <Button
           onClick={handleSave}
-          className="mt-4 w-full"
+          className="mt-4 flex justify-end"
           disabled={loading}
         >
           {loading ? "Saving..." : "Save Template"}
