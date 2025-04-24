@@ -1,10 +1,8 @@
 # Email CRM Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- Link of backend code  [Babel]([(https://github.com/sandeep0009/email_crm_backend)]) 
+- Link of backend code  ((https://github.com/sandeep0009/email_crm_backend)) 
 
 
 # Set Up Guide 
