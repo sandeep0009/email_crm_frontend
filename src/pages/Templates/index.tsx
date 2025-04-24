@@ -1,34 +1,77 @@
 import { useState } from "react";
 import EditorComponent from "../../components/EditorComponent";
+import { axiosInstance } from "../../lib/axios";
+import { Input } from "../../components/ui/input";
+import { Button } from "../../components/ui/button";
 
 const Template = () => {
-  const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
+  const [htmlCode, setHtmlCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
   const handleEditorChange = (newContent: string) => {
-    setContent(newContent);
+    setHtmlCode(newContent);
   };
 
-  const handleSave = () => {
-    console.log("Saved content:", content);
+  const handleSave = async () => {
+    if (!title || !htmlCode) {
+      setMessage("Title and content are required.");
+      return;
+    }
+
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const res = await axiosInstance.post("/create-template", {
+        title,
+        htmlCode,
+      });
+      setMessage("Template saved successfully!");
+      console.log("Response:", res.data);
+    } catch (error: any) {
+      console.error("Error saving template:", error);
+      setMessage("Error saving template.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="flex flex-row gap-4 w-full p-4">
-      <div className="w-1/2">
+    <div className="flex flex-col md:flex-row gap-4 w-full p-4">
+      <div className="md:w-1/2 space-y-4">
+        <div>
+          <label className="block text-sm font-medium mb-1">Template Title</label>
+          <Input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter title"
+          />
+        </div>
         <EditorComponent onChange={handleEditorChange} />
       </div>
-      <div className="w-1/2 border rounded-lg p-4 bg-white shadow">
+
+      <div className="md:w-1/2 border rounded-lg p-4 bg-white shadow">
         <div className="mb-4 font-semibold text-lg">Preview</div>
         <div
           className="min-h-[200px] border p-2 rounded text-sm"
-          dangerouslySetInnerHTML={{ __html: content }}
+          dangerouslySetInnerHTML={{ __html: htmlCode }}
         />
-        <button
+
+        <Button
           onClick={handleSave}
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="mt-4 w-full"
+          disabled={loading}
         >
-          Save Template
-        </button>
+          {loading ? "Saving..." : "Save Template"}
+        </Button>
+
+        {message && (
+          <p className={`mt-2 text-sm ${message.includes("Error") ? "text-red-600" : "text-green-600"}`}>
+            {message}
+          </p>
+        )}
       </div>
     </div>
   );
