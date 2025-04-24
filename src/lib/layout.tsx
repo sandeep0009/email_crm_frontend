@@ -7,7 +7,8 @@ type LayoutProp={
 }
 const Layout=({children}:LayoutProp)=>{
     const location=useLocation();
-    const validateRoute=['/template','/sender','/campaign' , "/"];
+    const validateRoute=['/template','/sender','/campaign' , "/",'/email-logs'];
+    
     const hideNavbar=!validateRoute.includes(location.pathname)
 
     return(

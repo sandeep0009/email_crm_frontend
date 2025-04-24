@@ -92,7 +92,12 @@ const Campaign = () => {
 
     try {
       const res = await axiosInstance.post("/create-campaign", payload);
-      console.log("Campaign created:", res.data);
+      if(res.status===201){
+        alert('successfully send');
+        setCampaignName("");
+      setRecipients([]);
+      setSelectedEntries([]);
+      }
     } catch (error) {
       console.error("Error creating campaign", error);
     }

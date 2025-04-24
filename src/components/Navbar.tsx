@@ -34,6 +34,9 @@ const Navbar = () => {
           <li>
             <Link to="/campaign" className="hover:font-bold">Campaign</Link>
           </li>
+          <li>
+            <Link to="/email-logs" className="hover:font-bold">Email Logs</Link>
+          </li>
         </ul>
 
         <div className="hidden md:flex gap-4">
@@ -67,6 +70,9 @@ const Navbar = () => {
             <li>
               <Link to="/campaign" className="hover:font-bold" onClick={() => setIsMobileMenuOpen(false)}>Campaign</Link>
             </li>
+            <li>
+            <Link to="/email-logs" className="hover:font-bold" onClick={() => setIsMobileMenuOpen(false)}>Email Logs</Link>
+          </li>
           </ul>
           <div className="flex flex-col gap-2">
             {token ? (

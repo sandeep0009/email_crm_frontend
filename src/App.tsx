@@ -8,6 +8,7 @@ import Layout from "./lib/layout"
 import ErrorPage from "./components/ErrorPage"
 import Home from "./pages/Home"
 import ProtectedRoutes from "./components/ProtectedRoutes"
+import EmailLogs from "./pages/Emaillogs.tsx"
 
 
 
@@ -23,6 +24,7 @@ function App() {
       <Route path="/signin" element={<Signin/>}/>
       <Route path="/campaign" element={<ProtectedRoutes children={<Campaign/>}/>}/>
       <Route path="/sender" element={<ProtectedRoutes children={<Sender/>}/>}/>
+      <Route path="/email-logs" element={<ProtectedRoutes children={<EmailLogs/>}/>}/>
       <Route path="*" element={<ErrorPage/>}/>
       
       
